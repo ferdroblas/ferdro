@@ -11,43 +11,44 @@ function initClient() {
       console.error('Error al inicializar el cliente de Google API:', error);
     });
   }
-  
-  // Función para buscar eventos por DNI
-  function searchByDni() {
-    const dni = document.getElementById('dni').value.trim();
+  function searchByEmail() {
+    const email = document.getElementById('email').value.trim();
+    
     gapi.client.sheets.spreadsheets.values.get({
-      spreadsheetId: '1E_g45qALP3E3jKkJ-myXezksGBoHUflveY51LA0YibE',
-      range: 'Turnos!A:F', // Rango a consultar  
+        spreadsheetId: '1E_g45qALP3E3jKkJ-myXezksGBoHUflveY51LA0YibE',
+        range: 'Turnos!A:F', // Rango a consultar  
     }).then(function(response) {
-        const data = response.result.values;
-        const resultsDiv = document.getElementById('results');
-        resultsDiv.innerHTML = '';
-    
-        if (!data || data.length === 0) {
-          resultsDiv.innerHTML = 'No se encontraron resultados.';
-          return;
-        }
-    
-        // Filtrar datos por DNI y fecha futura
-        const filteredData = data.filter(row => {
-          return row[5] === dni ;
+      const data = response.result.values;
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '';
+  
+      if (!data || data.length === 0) {
+        resultsDiv.innerHTML = 'No se encontraron resultados.';
+        return;
+      }
+  
+      // Filtrar datos por correo electrónico
+      const filteredData = data.filter(row => {
+        const emailColumn = row[5]; // Suponiendo que row[5] es la columna del correo electrónico
+        return emailColumn === email;
+      });
+  
+      if (filteredData.length === 0) {
+        resultsDiv.innerHTML = 'No se encontraron resultados para este correo electrónico.';
+      } else {
+        // Mostrar todos los resultados encontrados
+        filteredData.forEach(row => {
+          const resultDiv = document.createElement('div');
+          resultDiv.innerHTML = `<p><strong>Paciente:</strong> ${row[2]}</p>
+                                 <p><strong>Correo Electrónico:</strong> ${row[5]}</p>
+                                 <p><strong>Fecha:</strong> ${row[3]}</p>
+                                 <p><strong>Hora:</strong> ${row[4]}</p>`;
+          resultsDiv.appendChild(resultDiv);
         });
-    
-        if (filteredData.length === 0) {
-          resultsDiv.innerHTML = 'No se encontraron resultados para este DNI en fechas futuras.';
-        } else {
-          // Mostrar todos los resultados encontrados
-          filteredData.forEach(row => {
-            const resultDiv = document.createElement('div');
-            resultDiv.innerHTML = `<p><strong>Paciente:</strong> ${row[2]}</p>
-                                   <p><strong>DNI:</strong> ${row[5]}</p>
-                                   <p><strong>Fecha:</strong> ${row[3]}</p>
-                                   <p><strong>Hora:</strong> ${row[4]}</p>`;
-            resultsDiv.appendChild(resultDiv);
-          });
-        }
-      }, 
-      function(error) {
-        console.error('Error al buscar por DNI y fecha:', error);
+      }
+    }, function(error) {
+      console.error('Error al buscar por correo electrónico:', error);
     });
-}
+  }
+  // Función para buscar eventos por DNI
+ 
