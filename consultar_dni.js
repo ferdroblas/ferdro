@@ -51,7 +51,7 @@ function searchByEmail() {
 
       // Crear fila de títulos
       const headerRow = document.createElement('tr');
-      const headers = ['Fecha', 'Hora', 'Paciente', 'Correo Electrónico'];
+      const headers = ['Fecha', 'Hora', 'Paciente'];
 
       headers.forEach(headerText => {
         const headerCell = document.createElement('th');
@@ -67,17 +67,17 @@ function searchByEmail() {
         const fechaCell = document.createElement('td');
         const horaCell = document.createElement('td');
         const pacienteCell = document.createElement('td');
-        const emailCell = document.createElement('td');
+       // const emailCell = document.createElement('td');
 
         fechaCell.textContent = row[2]; // Suponiendo que row[2] es la columna de la fecha
         horaCell.textContent = row[3]; // Suponiendo que row[3] es la columna de la hora
         pacienteCell.textContent = row[1]; // Suponiendo que row[1] es la columna del paciente
-        emailCell.textContent = row[4]; // Suponiendo que row[4] es la columna del correo electrónico
+        //emailCell.textContent = row[4]; // Suponiendo que row[4] es la columna del correo electrónico
 
         rowElement.appendChild(fechaCell);
         rowElement.appendChild(horaCell);
         rowElement.appendChild(pacienteCell);
-        rowElement.appendChild(emailCell);
+       // rowElement.appendChild(emailCell);
 
         table.appendChild(rowElement);
       });
@@ -88,9 +88,9 @@ function searchByEmail() {
 
       // Mostrar información adicional sobre el paciente
       const infoDiv = document.createElement('div');
-      infoDiv.innerHTML = `<h2>Paciente</h2>
-                           <p>${filteredData[0][1]}</p>
-                           <p>${filteredData[0][4]}</p>`;
+      infoDiv.innerHTML = `<h3>${filteredData[0][1]}</h3>
+                           <h2>Turnos agendados</h2>
+                           `;
       resultsDiv.insertBefore(infoDiv, table);
     }
   }, function(error) {
