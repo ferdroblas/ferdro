@@ -1,16 +1,36 @@
 <!-- Código en tu página web HTML -->
 
+
+
 <!DOCTYPE html>
 <html>
   <head>
-    <base target="_top">
+  
+    <meta charset="UTF-8">
+    <title>Buscar por DNI</title>
     <script src="https://apis.google.com/js/api.js"></script>
-    <script src="https://script.google.com/macros/s/AKfycbxwfX0EnY32vkg4d_UZI_MlzNdkpgJSo0JFV3PhDcQqchucSFkjXegycRzr7C1sZqxU/exec"></script>
-    <script>
-      function searchEvents() {
-        var dni = document.getElementById('dni').value;
+  </head>
+  <body>
+    <h1>Buscar por DNI</h1>
+    <label for="dni">Ingrese el DNI:</label>
+    <input type="text" id="dni" name="dni" required>
+    <button onclick="searchByDni()">Buscar</button>
 
-        google.script.run.withSuccessHandler(displayResults).searchByDni(dni);
+    <div id="results"></div>
+
+    <script>
+      function searchByDni() {
+        var dni = document.getElementById('dni').value.trim();
+        var url = 'https://script.google.com/macros/s/AKfycbzCWnr47dotUCiAXZc1Moh6YgS8mIGhjUgqgFGrqxHHeaF3feSOKsPKfMb0wiB7jDt3/exec'; // Reemplaza con la URL de tu script publicado
+
+        fetch(url + '?dni=' + dni)
+          .then(response => response.json())
+          .then(data => {
+            displayResults(data);
+          })
+          .catch(error => {
+            console.error('Error al buscar por DNI:', error);
+          });
       }
 
       function displayResults(results) {
@@ -24,21 +44,13 @@
 
         results.forEach(function(row) {
           var resultDiv = document.createElement('div');
-          resultDiv.innerHTML = '<p><strong>Apellido:</strong> ' + row[1] + '</p>' +
-                                '<p><strong>Nombre:</strong> ' + row[2] + '</p>' +
-                                '<p><strong>DNI:</strong> ' + row[3] + '</p>' +
+          resultDiv.innerHTML = '<p><strong>Apellido:</strong> ' + row[0] + '</p>' +
+                                '<p><strong>Nombre:</strong> ' + row[1] + '</p>' +
+                                '<p><strong>DNI:</strong> ' + row[2] + '</p>' +
                                 '<hr>';
           resultsDiv.appendChild(resultDiv);
         });
       }
     </script>
-  </head>
-  <body>
-    <h1>Buscar por DNI</h1>
-    <label for="dni">DNI:</label>
-    <input type="text" id="dni" name="dni" required><br><br>
-    <button onclick="searchEvents()">Buscar</button><br><br>
-    <div id="results"></div>
   </body>
 </html>
-
