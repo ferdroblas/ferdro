@@ -15,36 +15,41 @@ function initClient() {
   // Función para buscar eventos por DNI
   function searchByDni() {
     const dni = document.getElementById('dni').value.trim();
+    const today = new Date(); // Fecha actual
     gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: '1E_g45qALP3E3jKkJ-myXezksGBoHUflveY51LA0YibE',
       range: 'Turnos!A:E', // Rango a consultar
+      
     }).then(function(response) {
-        console.log('Respuesta de la hoja de cálculo:', response.result)
-      const data = response.result.values;
-      const resultsDiv = document.getElementById('results');
-      resultsDiv.innerHTML = '';
-  
-      if (!data || data.length === 0) {
-        resultsDiv.innerHTML = 'No se encontraron resultados.';
-        return;
-      }
-  
-      // Filtrar datos por DNI
-      const filteredData = data.filter(row => row[0] === dni);
-  
-      if (filteredData.length === 0) {
-        resultsDiv.innerHTML = 'No se encontraron resultados para este DNI.';
-      } else {
-        filteredData.forEach(row => {
-          const resultDiv = document.createElement('div');
-          resultDiv.innerHTML = '<p><strong>DNI</strong> ' + row[0] + '</p>' + '<p><strong>Nombre:</strong> ' + row[1] + '</p>' +'<p><strong>Fecha:</strong> ' + row[2] + '</p>' + '<hr>';
-          resultsDiv.appendChild(resultDiv);
+        const data = response.result.values;
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = '';
+    
+        if (!data || data.length === 0) {
+          resultsDiv.innerHTML = 'No se encontraron resultados.';
+          return;
+        }
+    
+        // Filtrar datos por DNI y fecha futura
+        const filteredData = data.filter(row => {
+          const fechaTurno = new Date(row[3]); // Suponiendo que row[3] es la columna de la fecha
+          return row[0] === dni && fechaTurno > today;
         });
-      }
-    }, function(error) {
-      console.error('Error al buscar por DNI:', error);
-    });
-  }
-  
-  // Cargar la API de Google Client y llamar a initClient
-  gapi.load('client', initClient);
+    
+        if (filteredData.length === 0) {
+          resultsDiv.innerHTML = 'No se encontraron resultados para este DNI en fechas futuras.';
+        } else {
+          // Mostrar todos los resultados encontrados
+          filteredData.forEach(row => {
+            const resultDiv = document.createElement('div');
+            resultDiv.innerHTML = `<p><strong>Paciente:</strong> ${row[2]}</p>
+                                   <p><strong>DNI:</strong> ${row[0]}</p>
+                                   <p><strong>Fecha:</strong> ${row[3]}</p>
+                                   <p><strong>Hora:</strong> ${row[4]}</p>`;
+            resultsDiv.appendChild(resultDiv);
+          });
+        }
+      }, function(error) {
+        console.error('Error al buscar por DNI y fecha:', error);
+      });
+    }
