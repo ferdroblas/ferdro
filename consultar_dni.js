@@ -1,14 +1,14 @@
 const config = require('./config'); // Ruta al archivo config.js
 
 // Ahora puedes acceder a tu apiKey usando config.apiKey
-const api_Key = config.apiKey;
+//const api_Key = config.apiKey;
 
 gapi.load('client:auth2', initClient);
 
 function initClient() {
   gapi.client.init({
     // API Key para acceso público
-    apiKey: api_Key,
+    apiKey: config.apiKey,
     clientId: '521200181277-ggt79gnbpmco2qfl320pab9emrulr70m.apps.googleusercontent.com',
     // Descubrimiento de la API de Sheets
     discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest'],
