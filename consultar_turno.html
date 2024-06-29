@@ -1,56 +1,54 @@
 <!-- Código en tu página web HTML -->
-
-
-
 <!DOCTYPE html>
 <html>
-  <head>
-  
-    <meta charset="UTF-8">
-    <title>Buscar por DNI</title>
-    <script src="https://apis.google.com/js/api.js"></script>
-  </head>
-  <body>
-    <h1>Buscar por DNI</h1>
-    <label for="dni">Ingrese el DNI:</label>
-    <input type="text" id="dni" name="dni" required>
-    <button onclick="searchByDni()">Buscar</button>
+<head>
+  <meta charset="UTF-8">
+  <title>Buscar por DNI</title>
+</head>
+<body>
+  <h1>Buscar por DNI</h1>
+  <label for="dni">Ingrese el DNI:</label>
+  <input type="text" id="dni" name="dni" required>
+  <button onclick="searchByDni()">Buscar</button>
 
-    <div id="results"></div>
+  <div id="results"></div>
 
-    <script>
-      function searchByDni() {
-        var dni = document.getElementById('dni').value.trim();
-        var url = 'https://script.google.com/macros/s/AKfycbzCWnr47dotUCiAXZc1Moh6YgS8mIGhjUgqgFGrqxHHeaF3feSOKsPKfMb0wiB7jDt3/exec'; // Reemplaza con la URL de tu script publicado
+  <script>
+    function searchByDni() {
+      var dni = document.getElementById('dni').value.trim();
+      var url = 'https://script.google.com/macros/s/AKfycbz2TooD1xVaUytUZc0qOWfU_KUUxfPahGd3o4K1a0I0/dev'; // Reemplaza con la URL de tu script publicado
 
-        fetch(url + '?dni=' + dni)
-          .then(response => response.json())
-          .then(data => {
-            displayResults(data);
-          })
-          .catch(error => {
-            console.error('Error al buscar por DNI:', error);
-          });
-      }
 
-      function displayResults(results) {
-        var resultsDiv = document.getElementById('results');
-        resultsDiv.innerHTML = '';
-
-        if (results.length === 0) {
-          resultsDiv.innerHTML = 'No se encontraron resultados.';
-          return;
-        }
-
-        results.forEach(function(row) {
-          var resultDiv = document.createElement('div');
-          resultDiv.innerHTML = '<p><strong>Apellido:</strong> ' + row[0] + '</p>' +
-                                '<p><strong>Nombre:</strong> ' + row[1] + '</p>' +
-                                '<p><strong>DNI:</strong> ' + row[2] + '</p>' +
-                                '<hr>';
-          resultsDiv.appendChild(resultDiv);
+      fetch(url + '?dni=' + dni)
+        .then(response => response.json())
+        .then(data => {
+          displayResults(data);
+        })
+        .catch(error => {
+          console.error('Error al buscar por DNI:', error);
         });
+    }
+
+    function displayResults(results) {
+      var resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '';
+
+      if (results.length === 0) {
+        resultsDiv.innerHTML = 'No se encontraron resultados.';
+        return;
       }
-    </script>
-  </body>
+
+      results.forEach(function(row) {
+        var resultDiv = document.createElement('div');
+        resultDiv.innerHTML = '<p><strong>Apellido:</strong> ' + row[0] + '</p>' +
+                              '<p><strong>Nombre:</strong> ' + row[1] + '</p>' +
+                              '<p><strong>DNI:</strong> ' + row[2] + '</p>' +
+                              '<hr>';
+        resultsDiv.appendChild(resultDiv);
+      });
+    }
+  </script>
+</body>
 </html>
+
+
