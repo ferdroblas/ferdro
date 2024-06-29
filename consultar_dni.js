@@ -19,10 +19,10 @@ function initClient() {
 
   function searchByEmail() {
     const email = document.getElementById('email').value.trim();
-    const today = new Date(); // Obtener la fecha actual
+   // const today = new Date(); // Obtener la fecha actual
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: '1E_g45qALP3E3jKkJ-myXezksGBoHUflveY51LA0YibE',
-        range: 'Turnos!A:F', // Rango a consultar  
+        range: 'Turnos!A:E', // Rango a consultar  
     }).then(function(response) {
       const data = response.result.values;
       const resultsDiv = document.getElementById('results');
@@ -36,8 +36,8 @@ function initClient() {
       // Filtrar datos por correo electrónico
       const filteredData = data.filter(row => {
         const emailColumn = row[4]; // Suponiendo que row[5] es la columna del correo electrónico
-        const fechaTurno = new Date(row[2]); // Suponiendo que row[3] es la columna de la fecha del turno
-        return emailColumn === email && fechaTurno >= today;
+        //const fechaTurno = new Date(row[2]); // Suponiendo que row[3] es la columna de la fecha del turno
+        return emailColumn === email;
       });
   
       if (filteredData.length === 0) {
