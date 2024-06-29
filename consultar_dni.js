@@ -12,8 +12,7 @@ function initClient() {
     });
   }
   function searchByEmail() {
-    const email = document.getElementById('email').value.trim();
-    
+    const email = document.getElementById('email').value();
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: '1E_g45qALP3E3jKkJ-myXezksGBoHUflveY51LA0YibE',
         range: 'Turnos!A:F', // Rango a consultar  
@@ -35,8 +34,7 @@ function initClient() {
   
       if (filteredData.length === 0) {
         resultsDiv.innerHTML = 'No se encontraron resultados para este correo electrónico.';
-      } else {
-        // Mostrar todos los resultados encontrados
+      } else { 
         filteredData.forEach(row => {
           const resultDiv = document.createElement('div');
           resultDiv.innerHTML = `<p><strong>Paciente:</strong> ${row[2]}</p>
