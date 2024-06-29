@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitar Receta - Dr. [Tu Nombre]</title>
+    <style>
+        body {
+            font-family: 'Roboto Condensed', sans-serif;
+            background-color: #FFFFE0; /* Fondo amarillo muy claro */
+            color: #333333; /* Texto gris oscuro */
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #FFFFFF;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        h1 {
+            color: #003366; /* Azul oscuro */
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            color: #003366; /* Azul oscuro */
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #003366; /* Azul oscuro */
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            display: block;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #002244; /* Azul más oscuro */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Solicitar Receta - Dr. [Tu Nombre]</h1>
+        <form id="recetaForm">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
+            
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" name="apellido" required>
+            
+            <h2>Medicamento 1</h2>
+            <label for="med1_nombre">Nombre Comercial o Droga</label>
+            <input type="text" id="med1_nombre" name="med1_nombre" required>
+            
+            <label for="med1_dosis">Dosis en mg</label>
+            <input type="number" id="med1_dosis" name="med1_dosis" required>
+            
+            <label for="med1_cantidad">Cantidad por Caja</label>
+            <input type="number" id="med1_cantidad" name="med1_cantidad" required>
+            
+            <h2>Medicamento 2</h2>
+            <label for="med2_nombre">Nombre Comercial o Droga</label>
+            <input type="text" id="med2_nombre" name="med2_nombre">
+            
+            <label for="med2_dosis">Dosis en mg</label>
+            <input type="number" id="med2_dosis" name="med2_dosis">
+            
+            <label for="med2_cantidad">Cantidad por Caja</label>
+            <input type="number" id="med2_cantidad" name="med2_cantidad">
+            
+            <h2>Medicamento 3</h2>
+            <label for="med3_nombre">Nombre Comercial o Droga</label>
+            <input type="text" id="med3_nombre" name="med3_nombre">
+            
+            <label for="med3_dosis">Dosis en mg</label>
+            <input type="number" id="med3_dosis" name="med3_dosis">
+            
+            <label for="med3_cantidad">Cantidad por Caja</label>
+            <input type="number" id="med3_cantidad" name="med3_cantidad">
+
+            <h2>Comentarios</h2>
+            <label for="comentariose"></label>
+            <input type="text" id="comentarios_contenido" name="comentarios_contenido">
+            
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('recetaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            fetch('https://script.google.com/macros/s/AKfycbznqd895h_gspGNuwI0raejre3zYQA41abrdN4uLuZlCpUVVYyj_ZSl9oSrnnpjOAaSSg/exec', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.json()).then(data => {
+                window.location.href = 'confirmacion.html';
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('Hubo un error al enviar la receta');
+            });
+        });
+    </script>
+</body>
+</html>
+
