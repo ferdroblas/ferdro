@@ -35,8 +35,8 @@ function initClient() {
   
       // Filtrar datos por correo electrónico
       const filteredData = data.filter(row => {
-        const emailColumn = row[5]; // Suponiendo que row[5] es la columna del correo electrónico
-        const fechaTurno = new Date(row[3]); // Suponiendo que row[3] es la columna de la fecha del turno
+        const emailColumn = row[4]; // Suponiendo que row[5] es la columna del correo electrónico
+        const fechaTurno = new Date(row[2]); // Suponiendo que row[3] es la columna de la fecha del turno
         return emailColumn === email && fechaTurno >= today;
       });
   
@@ -45,10 +45,10 @@ function initClient() {
       } else { 
         filteredData.forEach(row => {
           const resultDiv = document.createElement('div');
-          resultDiv.innerHTML = `<p><strong>Paciente:</strong> ${row[2]}</p>
-                                 <p><strong>Correo Electrónico:</strong> ${row[5]}</p>
-                                 <p><strong>Fecha:</strong> ${row[3]}</p>
-                                 <p><strong>Hora:</strong> ${row[4]}</p>`;
+          resultDiv.innerHTML = `<p><strong>Paciente:</strong> ${row[1]}</p>
+                                 <p><strong>Correo Electrónico:</strong> ${row[4]}</p>
+                                 <p><strong>Fecha:</strong> ${row[2]}</p>
+                                 <p><strong>Hora:</strong> ${row[3]}</p>`;
           resultsDiv.appendChild(resultDiv);
         });
       }
