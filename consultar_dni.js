@@ -4,12 +4,12 @@
 //const apiKey = config.apiKey;
 
 
-gapi.load('client:auth2', initClient);
+
 function initClient() {
   gapi.client.init({
     // API Key para acceso público
-    clientId: '521200181277-ggt79gnbpmco2qfl320pab9emrulr70m.apps.googleusercontent.com',
     apiKey: 'AIzaSyAzd3hQ75-8MDEGqTa8t_V4Uk5W5Ea365Y',
+    clientId: '521200181277-ggt79gnbpmco2qfl320pab9emrulr70m.apps.googleusercontent.com',
     // Descubrimiento de la API de Sheets
     discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest'],
     scope: 'https://www.googleapis.com/auth/spreadsheets',
@@ -18,7 +18,7 @@ function initClient() {
   }, function(error) {
     console.error('Error al inicializar el cliente de Google API:', error);
   });
-  
+  gapi.load('client:auth2', initClient);
 }
 
 function searchByEmail() {
