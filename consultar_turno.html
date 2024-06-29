@@ -4,7 +4,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Buscar por DNI</title>
+  <title>Buscar por iii</title>
   <!-- Incluir la biblioteca de Google Sheets API -->
   <script src="https://apis.google.com/js/api.js"></script>
   <script>
@@ -57,8 +57,8 @@
 
       results.forEach(function(row) {
         var resultDiv = document.createElement('div');
-        resultDiv.innerHTML = '<p><strong>Apellido:</strong> ' + row[3] + '</p>' +
-                              '<p><strong>Nombre:</strong> ' + row[4] + '</p>' +
+        resultDiv.innerHTML = '<p><strong>Apellido:</strong> ' + row[2] + '</p>' +
+                              '<p><strong>Nombre:</strong> ' + row[1] + '</p>' +
                               '<p><strong>DNI:</strong> ' + row[0] + '</p>' +
                               '<hr>';
         resultsDiv.appendChild(resultDiv);
