@@ -30,20 +30,77 @@ function initClient() {
   
       if (!data || data.length === 0) {
         resultsDiv.innerHTML = 'No se encontraron resultados.';
-        return;
-      }
+        return};
+      });
+    };
   
       // Filtrar datos por correo electrónico
-      const filteredData = data.filter(row => {
+        const filteredData = data.filter(row => {
         const emailColumn = row[4]; // Suponiendo que row[5] es la columna del correo electrónico
-        //const fechaTurno = new Date(row[2]); // Suponiendo que row[3] es la columna de la fecha del turno
+        const personaColumn = row[1]; // Suponiendo que row[1] es la columna del estado
+
+  // Verificar si el estado no comienza con "Cancelado"
+        if (!personaColumnColumn.trim().startsWith("Cancel")) {
         return emailColumn === email;
+        }
+  
+        return false; // No incluir filas con estado "Cancelado"
+        //const fechaTurno = new Date(row[2]); // Suponiendo que row[3] es la columna de la fecha del turno
+        
       });
   
       if (filteredData.length === 0) {
         resultsDiv.innerHTML = 'No se encontraron resultados para este correo electrónico.';
       } else { 
-        filteredData.forEach(row => {
+
+        const table = document.createElement('table');
+        table.classList.add('results-table');
+
+  // Crear fila de títulos
+        const headerRow = document.createElement('tr');
+        const headers = ['Fecha', 'Hora', 'Paciente', 'Correo Electrónico'];
+
+        headers.forEach(headerText => {
+        const headerCell = document.createElement('th');
+         headerCell.textContent = headerText;
+        headerRow.appendChild(headerCell);
+  });
+
+  table.appendChild(headerRow);
+
+  // Iterar sobre los datos filtrados y agregar filas a la tabla
+  filteredData.forEach(row => {
+    const rowElement = document.createElement('tr');
+    const fechaCell = document.createElement('td');
+    const horaCell = document.createElement('td');
+    const pacienteCell = document.createElement('td');
+    const emailCell = document.createElement('td');
+
+    fechaCell.textContent = row[2]; // Suponiendo que row[2] es la columna de la fecha
+    horaCell.textContent = row[3]; // Suponiendo que row[3] es la columna de la hora
+    pacienteCell.textContent = row[1]; // Suponiendo que row[1] es la columna del paciente
+    emailCell.textContent = row[4]; // Suponiendo que row[4] es la columna del correo electrónico
+
+    rowElement.appendChild(fechaCell);
+    rowElement.appendChild(horaCell);
+    rowElement.appendChild(pacienteCell);
+    rowElement.appendChild(emailCell);
+
+    table.appendChild(rowElement);
+  });
+
+  // Mostrar la tabla en resultsDiv
+  resultsDiv.innerHTML = ''; // Limpiar contenido previo
+  resultsDiv.appendChild(table);
+
+  // Mostrar información adicional sobre el paciente
+  const infoDiv = document.createElement('div');
+  infoDiv.innerHTML = `<h2>Paciente</h2>
+                       <p>${filteredData[0][1]}</p>
+                       <p>${filteredData[0][4]}</p>`;
+  resultsDiv.insertBefore(infoDiv, table); // Insertar antes de la tabla
+}
+        /* filteredData.forEach(row => {
           const resultDiv = document.createElement('div');
           resultDiv.innerHTML = `<p><strong>Paciente:</strong> ${row[1]}</p>
                                  <p><strong>Correo Electrónico:</strong> ${row[4]}</p>
@@ -56,5 +113,4 @@ function initClient() {
       console.error('Error al buscar por correo electrónico:', error);
     });
   }
-  // Función para buscar eventos por DNI
- 
+*/
