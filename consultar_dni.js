@@ -37,7 +37,7 @@ function initClient() {
       } else {
         filteredData.forEach(row => {
           const resultDiv = document.createElement('div');
-          resultDiv.innerHTML = '<p><strong>Paciente:</strong> ${row[2]}</p> <p><strong>DNI:</strong> ${row[0]}</p><p><strong>Fecha:</strong> ${row[3]}</p><p><strong>Hora:</strong> ${row[4]}</p>';
+          resultDiv.innerHTML = '<p><strong>Paciente:</strong>${row[2]}</p> <p><strong>DNI:</strong>${row[0]}</p><p><strong>Fecha:</strong> ${row[3]}</p><p><strong>Hora:</strong> ${row[4]}</p>';
           resultsDiv.appendChild(resultDiv);
         });
       }
