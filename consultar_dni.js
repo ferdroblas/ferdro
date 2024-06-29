@@ -1,3 +1,4 @@
+gapi.load('client:auth2', initClient);
 //const config = require('./config'); // Ruta al archivo config.js
 
 // Ahora puedes acceder a tu apiKey usando config.apiKey
@@ -18,7 +19,7 @@ function initClient() {
   }, function(error) {
     console.error('Error al inicializar el cliente de Google API:', error);
   });
-  gapi.load('client:auth2', initClient);
+  
 }
 
 function searchByEmail() {
@@ -26,7 +27,7 @@ function searchByEmail() {
   // const today = new Date(); // Obtener la fecha actual
   gapi.client.sheets.spreadsheets.values.get({
     spreadsheetId: '1E_g45qALP3E3jKkJ-myXezksGBoHUflveY51LA0YibE',
-    range: 'Turnos!A:E', // Rango a consultar
+    range: 'Turnos!A:F', // Rango a consultar
   }).then(function(response) {
     const data = response.result.values;
     const resultsDiv = document.getElementById('results');
