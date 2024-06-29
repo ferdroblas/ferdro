@@ -40,16 +40,14 @@ function initClient() {
         const personaColumn = row[1]; // Suponiendo que row[1] es la columna del estado
 
   // Verificar si el estado no comienza con "Cancelado"
-        if (!personaColumnColumn.trim().startsWith("Cancel")) {
+        if (!personaColumnC.trim().startsWith("Cancel")) {
         return emailColumn === email;
         }
   
-        return false; // No incluir filas con estado "Cancelado"
-        //const fechaTurno = new Date(row[2]); // Suponiendo que row[3] es la columna de la fecha del turno
-        
+        return false; 
       });
   
-      if (filteredData.length === 0) {
+    if (filteredData.length === 0) {
         resultsDiv.innerHTML = 'No se encontraron resultados para este correo electrónico.';
       } else { 
 
@@ -62,9 +60,9 @@ function initClient() {
 
         headers.forEach(headerText => {
         const headerCell = document.createElement('th');
-         headerCell.textContent = headerText;
+        headerCell.textContent = headerText;
         headerRow.appendChild(headerCell);
-  });
+    });
 
   table.appendChild(headerRow);
 
@@ -98,8 +96,10 @@ function initClient() {
   infoDiv.innerHTML = `<h2>Paciente</h2>
                        <p>${filteredData[0][1]}</p>
                        <p>${filteredData[0][4]}</p>`;
-  resultsDiv.insertBefore(infoDiv, table); // Insertar antes de la tabla
+  resultsDiv.insertBefore(infoDiv, table); 
 }
+
+
         /* filteredData.forEach(row => {
           const resultDiv = document.createElement('div');
           resultDiv.innerHTML = `<p><strong>Paciente:</strong> ${row[1]}</p>
