@@ -18,7 +18,7 @@ function initClient() {
     const today = new Date(); // Fecha actual
     gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: '1E_g45qALP3E3jKkJ-myXezksGBoHUflveY51LA0YibE',
-      range: 'Turnos!A:E', // Rango a consultar
+      range: 'Turnos!A:F', // Rango a consultar
       
     }).then(function(response) {
         const data = response.result.values;
@@ -33,7 +33,7 @@ function initClient() {
         // Filtrar datos por DNI y fecha futura
         const filteredData = data.filter(row => {
           const fechaTurno = new Date(row[3]); // Suponiendo que row[3] es la columna de la fecha
-          return row[0] === dni && fechaTurno > today;
+          return row[5] === dni && fechaTurno > today;
         });
     
         if (filteredData.length === 0) {
@@ -43,7 +43,7 @@ function initClient() {
           filteredData.forEach(row => {
             const resultDiv = document.createElement('div');
             resultDiv.innerHTML = `<p><strong>Paciente:</strong> ${row[2]}</p>
-                                   <p><strong>DNI:</strong> ${row[0]}</p>
+                                   <p><strong>DNI:</strong> ${row[5]}</p>
                                    <p><strong>Fecha:</strong> ${row[3]}</p>
                                    <p><strong>Hora:</strong> ${row[4]}</p>`;
             resultsDiv.appendChild(resultDiv);
