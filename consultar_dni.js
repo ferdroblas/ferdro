@@ -35,17 +35,17 @@ function initClient() {
     };
   
       // Filtrar datos por correo electrónico
-        const filteredData = data.filter(row => {
+    const filteredData = data.filter(row => {
         const emailColumn = row[4]; // Suponiendo que row[5] es la columna del correo electrónico
         const personaColumn = row[1]; // Suponiendo que row[1] es la columna del estado
 
   // Verificar si el estado no comienza con "Cancelado"
-        if (!personaColumnC.trim().startsWith("Cancel")) {
-        return emailColumn === email;
-        }
+    if (!personaColumn.trim().startsWith("Cancel")) {
+            return emailColumn === email;
+        };
   
-        return false; 
-      });
+         return false; 
+    });
   
     if (filteredData.length === 0) {
         resultsDiv.innerHTML = 'No se encontraron resultados para este correo electrónico.';
@@ -59,12 +59,12 @@ function initClient() {
         const headers = ['Fecha', 'Hora', 'Paciente', 'Correo Electrónico'];
 
         headers.forEach(headerText => {
-        const headerCell = document.createElement('th');
-        headerCell.textContent = headerText;
+            const headerCell = document.createElement('th');
+            headerCell.textContent = headerText;
         headerRow.appendChild(headerCell);
     });
 
-  table.appendChild(headerRow);
+    table.appendChild(headerRow);
 
   // Iterar sobre los datos filtrados y agregar filas a la tabla
   filteredData.forEach(row => {
