@@ -15,9 +15,10 @@ function initClient() {
       console.error('Error al inicializar el cliente de Google API:', error);
     });
   }
-  
+
   function searchByEmail() {
     const email = document.getElementById('email').value.trim();
+    const today = new Date(); // Obtener la fecha actual
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: '1E_g45qALP3E3jKkJ-myXezksGBoHUflveY51LA0YibE',
         range: 'Turnos!A:F', // Rango a consultar  
@@ -34,7 +35,8 @@ function initClient() {
       // Filtrar datos por correo electrónico
       const filteredData = data.filter(row => {
         const emailColumn = row[5]; // Suponiendo que row[5] es la columna del correo electrónico
-        return emailColumn === email;
+        const fechaTurno = new Date(row[3]); // Suponiendo que row[3] es la columna de la fecha del turno
+        return emailColumn === email && fechaTurno >= today;
       });
   
       if (filteredData.length === 0) {
