@@ -33,7 +33,7 @@ function initClient() {
         // Filtrar datos por DNI y fecha futura
         const filteredData = data.filter(row => {
           const fechaTurno = new Date(row[3]); // Suponiendo que row[3] es la columna de la fecha
-          return row[5] === dni && fechaTurno > today;
+          return row[5] === dni ;
         });
     
         if (filteredData.length === 0) {
