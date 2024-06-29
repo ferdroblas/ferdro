@@ -12,7 +12,7 @@ function initClient() {
     });
   }
   function searchByEmail() {
-    const email = document.getElementById('email').value();
+    const email = document.getElementById('email').value.trim();
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: '1E_g45qALP3E3jKkJ-myXezksGBoHUflveY51LA0YibE',
         range: 'Turnos!A:F', // Rango a consultar  
