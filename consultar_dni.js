@@ -6,6 +6,7 @@ function initClient() {
     gapi.client.init({
       // API Key para acceso público
       apiKey: 'AIzaSyAzd3hQ75-8MDEGqTa8t_V4Uk5W5Ea365Y',
+      clientId: '521200181277-ggt79gnbpmco2qfl320pab9emrulr70m.apps.googleusercontent.com',
       // Descubrimiento de la API de Sheets
       discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest'],
       scope: 'https://www.googleapis.com/auth/spreadsheets',
