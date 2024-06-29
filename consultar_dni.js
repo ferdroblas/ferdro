@@ -17,7 +17,7 @@ function initClient() {
     const dni = document.getElementById('dni').value.trim();
     gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: '1E_g45qALP3E3jKkJ-myXezksGBoHUflveY51LA0YibE',
-      range: 'Turnos!A:F', // Rango a consultar
+      range: 'Turnos!A1:F400', // Rango a consultar
     }).then(function(response) {
       const data = response.result.values;
       const resultsDiv = document.getElementById('results');
@@ -29,7 +29,7 @@ function initClient() {
       }
   
       // Filtrar datos por DNI
-      const filteredData = data.filter(row => row[3] === dni);
+      const filteredData = data.filter(row => row[0] === dni);
   
       if (filteredData.length === 0) {
         resultsDiv.innerHTML = 'No se encontraron resultados para este DNI.';
@@ -38,7 +38,7 @@ function initClient() {
           const resultDiv = document.createElement('div');
           resultDiv.innerHTML = `<p><strong>Apellido:</strong> ${row[1]}</p>
                                  <p><strong>Nombre:</strong> ${row[2]}</p>
-                                 <p><strong>DNI:</strong> ${row[3]}</p>
+                                 <p><strong>DNI:</strong> ${row[0]}</p>
                                  <p><strong>Fecha de Turno:</strong> ${row[4]}</p>`;
           resultsDiv.appendChild(resultDiv);
         });
