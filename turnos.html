@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turnos - Dr. [Tu Nombre]</title>
+    <style>
+        body {
+            font-family: 'Roboto Condensed', sans-serif;
+            background-color: #fdfded; /* Fondo amarillo muy claro */
+            color: #333333; /* Texto gris oscuro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: #FFFFFF;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
+        }
+        h1 {
+            color: #003366; /* Azul oscuro */
+            margin-bottom: 20px;
+        }
+        .link {
+            display: block;
+            background-color: #003366; /* Azul oscuro */
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .link:hover {
+            background-color: #002244; /* Azul más oscuro */
+        }
+        .calendly-inline-widget {
+            width: 100%;
+            max-width: 400px;
+            height: 700px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Turnos - Dr. [Tu Nombre]</h1>
+        <!-- Principio del widget integrado de Calendly -->
+        <div class="calendly-inline-widget" data-url="https://calendly.com/fernando-droblas/consultorio-virtual?hide_event_type_details=1&hide_gdpr_banner=1"></div>
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        <!-- Final del widget integrado de Calendly -->
+        <a href="consultar_turno.html" class="link">Consultar mi próximo turno</a>
+    </div>
+</body>
+</html>
