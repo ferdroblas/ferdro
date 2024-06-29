@@ -1,16 +1,21 @@
 // Función para cargar la API de Google Client
+gapi.load('client:auth2', initClient);
+
+
 function initClient() {
     gapi.client.init({
       // API Key para acceso público
       apiKey: 'AIzaSyAzd3hQ75-8MDEGqTa8t_V4Uk5W5Ea365Y',
       // Descubrimiento de la API de Sheets
       discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest'],
+      scope: 'https://www.googleapis.com/auth/spreadsheets',
     }).then(function() {
       console.log('Cliente de Google API inicializado correctamente.');
     }, function(error) {
       console.error('Error al inicializar el cliente de Google API:', error);
     });
   }
+  
   function searchByEmail() {
     const email = document.getElementById('email').value.trim();
     gapi.client.sheets.spreadsheets.values.get({
