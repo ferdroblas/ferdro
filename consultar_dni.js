@@ -15,11 +15,9 @@ function initClient() {
   // Función para buscar eventos por DNI
   function searchByDni() {
     const dni = document.getElementById('dni').value.trim();
-    const today = new Date(); // Fecha actual
     gapi.client.sheets.spreadsheets.values.get({
       spreadsheetId: '1E_g45qALP3E3jKkJ-myXezksGBoHUflveY51LA0YibE',
-      range: 'Turnos!A:F', // Rango a consultar
-      
+      range: 'Turnos!A:F', // Rango a consultar  
     }).then(function(response) {
         const data = response.result.values;
         const resultsDiv = document.getElementById('results');
@@ -32,7 +30,6 @@ function initClient() {
     
         // Filtrar datos por DNI y fecha futura
         const filteredData = data.filter(row => {
-          const fechaTurno = new Date(row[3]); // Suponiendo que row[3] es la columna de la fecha
           return row[5] === dni ;
         });
     
@@ -49,7 +46,8 @@ function initClient() {
             resultsDiv.appendChild(resultDiv);
           });
         }
-      }, function(error) {
+      }, 
+      function(error) {
         console.error('Error al buscar por DNI y fecha:', error);
-      });
-    }
+    });
+}
