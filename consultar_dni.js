@@ -9,7 +9,7 @@ const apiKey = config.apiKey;
 function initClient() {
   gapi.client.init({
     // API Key para acceso público
-    apiKey: 'AIzaSyA687BWj2bD3dk2DnqpCAjPMcB9jeDTKP8',
+    apiKey,
     clientId: '521200181277-ggt79gnbpmco2qfl320pab9emrulr70m.apps.googleusercontent.com',
     // Descubrimiento de la API de Sheets
     discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest'],
