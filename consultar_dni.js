@@ -1,8 +1,8 @@
 gapi.load('client:auth2', initClient);
-//const config = require('./config'); // Ruta al archivo config.js
+const config = require('./config'); // Ruta al archivo config.js
 
 // Ahora puedes acceder a tu apiKey usando config.apiKey
-//const apiKey = config.apiKey;
+const apiKey = config.apiKey;
 
 
 
